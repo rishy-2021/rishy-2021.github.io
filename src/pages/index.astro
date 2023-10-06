@@ -1,0 +1,218 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Dino from "../components/Dino.astro";
+
+const lifeUpdates = {
+    "2023": [
+        {
+            id: 2,
+            title: "Developed, launched and managing Forume, a dynamic question-and-answer platform ",
+        },
+        {
+            id: 3,
+            title: "Open Source Contributer with Twenty & Mattermost (Mar-Present)",
+        },
+        {
+            id: 4,
+            title: "Worked with OpenSkill as a Software Engineer Intern (Jan-Jun)",
+        },
+    ],
+    "2022": [
+        {
+            id: 1,
+            title: "Worked with Leads4Needs as a Software Engineer Intern (Jul-Sep)",
+        },
+        {
+            id: 2,
+            title: "Selected as React.js Subject Matter Expert at Relevel (by Unacademy)",
+        },
+
+    ],
+    "2021": [
+        {
+            id: 1,
+            title: "Worked in Opportunity college project at IIT Kanpur as Web developer intern",
+        },
+    ],
+};
+
+let blogs = (await fetch(
+    "https://dev.to/api/articles?username=ritesh-purwar"
+).then((res) => res.json())) as any[];
+blogs = blogs.splice(0, 3);
+---
+
+<Layout title="Ritesh Purwar" description="Welcome to my page : )">
+    <Hero />
+    <section class="mt-4 pb-2 dark:text-zinc-300">
+        <h2 class="text-2xl">Life Changelog & Updates</h2>
+        <div>
+            {
+                Object.entries(lifeUpdates)
+                    .sort(([year1], [year2]) => {
+                        return parseInt(year2) - parseInt(year1);
+                    })
+                    .map(([year, updates]) => (
+                        <div>
+                            <h3 class="text-xl my-2">{year}</h3>
+                            <ul>
+                                {updates.map((update) => (
+                                    <li class="flex items-center">
+                                        <svg
+                                            stroke="currentColor"
+                                            fill="currentColor"
+                                            stroke-width="0"
+                                            viewBox="0 0 16 16"
+                                            class="text-blue-500 mr-2"
+                                            height="1em"
+                                            width="1em"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                        </svg>
+                                        <span class="font-semibold">
+                                            {update.title}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+            }
+            <a href="/experiences" class="flex space-x-2 items-center mt-4">
+                <span>Checkout all my works</span>
+                <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 16 16"
+                    class="text-blue-500"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M8.5 1.5a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM7 5.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H8.5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H8.5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H8.5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H8.5a.5.5 0 0 1-.5-.5z"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+    <section class="mt-4 pb-2 dark:text-zinc-300">
+        <h2 class="text-2xl my-2">Recent blog & articles</h2>
+        {
+            blogs.map((blog) => (
+                <a
+                    href={blog.canonical_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center border-l border-zinc-100 pl-2 mb-2 transition hover:border-zinc-300"
+                >
+                    <p><span class="font-semibold text-lg">{blog.title}</span><br/>{blog.description}</p>
+                </a>
+            ))
+        }
+    </section>
+    <section class="mt-4 pb-2 dark:text-zinc-300">
+        <h2 class="text-2xl my-2">Philosophy Which I Follows</h2>
+        <p>Learning never stops - Run, fall, get up repeat</p>
+        <p>Keep things simple - Simple can be harder than complex. You have to work hard to get your thinking clean to make it simple.</p>
+    </section>
+
+    <section class="mt-4 mb-8 dark:text-zinc-300">
+        <h2 class="text-2xl my-2">Contact me</h2>
+        <form
+            class="space-y-6 mx-auto border border-blue-200 rounded p-6 my-4 w-full dark:border-gray-800 bg-blue-50 dark:bg-blue-opaque"
+            id="contact-form"
+        >
+            <div class="space-y-2">
+                <label for="from_name" class="text-lg">Full name</label>
+                <input
+                    id="from_name"
+                    type="text"
+                    placeholder="Your name"
+                    class="w-full p-2 rounded dark:bg-gray-800 border border-gray-200"
+                    name="from_name"
+                />
+            </div>
+            <div class="space-y-2">
+                <label for="reply_to" class="text-lg">Email</label>
+                <input
+                    id="reply_to"
+                    type="email"
+                    placeholder="Your email"
+                    class="w-full p-2 rounded dark:bg-gray-800 border border-gray-200"
+                    name="reply_to"
+                />
+            </div>
+            <div class="space-y-2">
+                <label for="message" class="text-lg">Message</label>
+                <textarea
+                    id="message"
+                    rows="3"
+                    placeholder="Your message"
+                    class="w-full p-2 rounded dark:bg-gray-800 border border-gray-200"
+                    name="message"></textarea>
+            </div>
+            <button
+                type="submit"
+                id="contactFormBtn"
+                class="w-full flex items-center justify-center px-3 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                >Send Message</button
+            >
+        </form>
+    </section>
+    <Dino />
+</Layout>
+
+<style>
+    :is(.dark .dark\:bg-blue-opaque) {
+        background-color: rgba(13, 42, 148, 0.18);
+    }
+</style>
+
+<script>
+    const contactForm = document.getElementById("contact-form");
+    const contactFormBtn = document.getElementById("contactFormBtn");
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+
+    contactForm?.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (
+            this.from_name.value.length < 3 ||
+            this.message.value.length < 10 ||
+            !emailRegex.test(this.reply_to.value)
+        ) {
+            alert("Please fill the form correctly");
+            return;
+        }
+
+        contactFormBtn?.setAttribute("disabled", "disabled");
+        contactFormBtn?.classList.add("opacity-50");
+
+        emailjs
+            .sendForm(
+                "service_hf1jiuc",
+                "template_pg4422m",
+                this,
+                "aJgInfpLC2IuFXA9X"
+            )
+            .then(() => {
+                console.log("success");
+                alert("Message sent successfully!");
+
+                contactFormBtn?.removeAttribute("disabled");
+                contactFormBtn?.classList.remove("opacity-50");
+            })
+            .catch((err) => {
+                console.log(err);
+
+                contactFormBtn?.removeAttribute("disabled");
+                contactFormBtn?.classList.remove("opacity-50");
+            });
+    });
+</script>
