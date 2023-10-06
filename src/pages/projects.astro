@@ -1,0 +1,60 @@
+---
+import MobileProject from "../components/MobileProject.astro";
+import Project from "../components/Project.astro";
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+  {
+    id: 1,
+    name: "good-f-issues",
+    description: "Find good first issues org wide (Built using Qwik.js).",
+    imgUrl: "/assets/good-f-issues.png",
+    github_link: "https://github.com/rishy-2021/good-f-issues",
+    live_link: "https://good-f-issues.netlify.app/",
+  }
+];
+
+const mobile_projects = [];
+---
+
+<Layout
+  title="Projects | Ritesh Purwar"
+  description="Welcome to my page - Sid : )"
+>
+  <section class="mt-8 sm:mt-16">
+    <h1
+      class="text-zinc-900 dark:text-zinc-100 text-3xl md:text-5xl font-bold tracking-tight"
+    >
+      Always exploring and building.
+    </h1>
+    <h2 class="my-6 text-zinc-700 dark:text-zinc-300 text-base">
+      Over the years I have worked on many things, but here are the ones that I
+      am most <br /> proud of. I am a firm believer in open source, so please feel
+      free to contribute.
+    </h2>
+  </section>
+  <h2>
+    <span
+      class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
+    >
+      Mobile Apps
+    </span>
+  </h2>
+  <section class="my-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+    {mobile_projects.map((project) => <MobileProject project={project} />)}
+  </section>
+  <h2>
+    <span
+      class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
+    >
+      Web Apps, CLIs and Libraries
+    </span>
+  </h2>
+  <section class="my-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+    {
+      projects.map((project, index) => (
+        <Project project={project} data-index={index} />
+      ))
+    }
+  </section>
+</Layout>
