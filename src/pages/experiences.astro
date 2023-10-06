@@ -1,0 +1,76 @@
+---
+import Experience from "../components/Experience.astro";
+import Layout from "../layouts/Layout.astro";
+
+let exp = [
+{
+    id: 1,
+    title: "Software Engineer Intern",
+    company: '<a href="https://leads4needs.com/" target="_blank">Leads4Needs</a>',
+    description:
+      'I had the opportunity to work as a Full Stack Developer at Leads4Needs, where I actively contributed to the development of a dynamic website focused on listing businesses and providing them with high-quality leads. This experience allowed me to enhance my skills in both front-end and back-end technologies, and gain valuable insights into capturing a larger market for businesses.',
+    span: "Jan 2023 - June 2023",
+    skills: [
+      "Next.js",
+      "Typescript",
+      "Redux",
+      "Node",
+      "Express",
+      "REST API"
+    ],
+  },
+  {
+    id: 2,
+    title: "Founding Software Engineer Intern",
+    company: '<a href="https://elevatr.in/" target="_blank">OpenSkill</a>',
+    description:
+      'At OpenSkill, we create a single platform to manage all your business  <a class="underline" href="https://elevatr.in/" target="_blank">elevatr.in</a> using React.js and Ant designs. I created complex React.js components and helped in designing the order, invoices, inventory, purchases and expenses. I also involved in developing discount, accounting, location and brances sections',
+    span: "Jan 2023 - June 2023",
+    skills: [
+      "React.js",
+      "Typescript",
+      "Mobx-State-Tree",
+      "Ant Design",
+      "Tailwind",
+    ],
+  },
+  {
+    id: 3,
+    title: "Open Source Contributor",
+    company: '<a href="https://app.twenty.com/" target="_blank">Twenty.com</a>',
+    description:
+      "An active contributor to Twenty organization. Top contributor in GSoC leaderboard 2022 - Rank #1. I was selected as the Community Member of the Month (June 2022). Worked on different categories under Twenty organisation, specifically contributed to Twenty' people and companies workspace.",
+    span: "Aug 2023 - Present",
+    skills: [
+      "JavaScript",
+      "TypeScript",
+      "React.js",
+    ],
+  }
+];
+---
+
+<Layout
+  title="Experiences | Ritesh Purwar"
+  description="Welcome to my page - Sid : )"
+>
+  <section class="mt-8 sm:mt-16">
+    <h1
+      class="text-zinc-900 dark:text-zinc-100 text-3xl md:text-5xl font-bold tracking-tight"
+    >
+      Stay hungry, stay curious.
+    </h1>
+    <h2 class="mt-6 text-zinc-700 dark:text-zinc-300 text-base">
+      In my years in college, I've had the privilege of working with some
+      amazing people and organizations, both startups and open source.<br />
+      These experiences have given me valuable insights into the software industry.
+      Here are some highlights.
+    </h2>
+  </section>
+
+  <ol class="my-8 relative border-l border-gray-100 dark:border-gray-700">
+    {exp.map((e) => <Experience experience={e} />)}
+  </ol>
+</Layout>
+
+<style></style>
