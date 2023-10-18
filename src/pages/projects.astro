@@ -6,11 +6,27 @@ import Layout from "../layouts/Layout.astro";
 const projects = [
   {
     id: 1,
-    name: "good-f-issues",
-    description: "Find good first issues org wide (Built using Qwik.js).",
-    imgUrl: "/assets/good-f-issues.png",
-    github_link: "https://github.com/rishy-2021/good-f-issues",
-    live_link: "https://good-f-issues.netlify.app/",
+    name: "foruMe",
+    description: "web platform for community enagement, built using Next.js, Express.js & Typescript.",
+    imgUrl: "/assets/foruMe-thumbnail.png",
+    github_link: "https://github.com/rishy-2021/Forume",
+    live_link: "https://forume.netlify.app/",
+  },
+  {
+    id: 2,
+    name: "quiz-master",
+    description: "a feature-rich web application for conducting MCQ-based tests and allowing students to take tests, view results and teachers to input MCQ questions.",
+    imgUrl: "/assets/quiz-thumb.png",
+    github_link: "https://github.com/rishy-2021/ONLINE_EXAM_FRONTEND",
+    live_link: "https://quiz-master-web.netlify.app/",
+  },
+  {
+    id: 2,
+    name: "ritesh-purwar.me",
+    description: "my personal portfolio website built using Astro",
+    imgUrl: "/assets/ritesh-thumbnail.png",
+    github_link: "https://github.com/rishy-2021/rishy-2021.github.io",
+    live_link: "https://ritesh-purwar.me/",
   }
 ];
 
@@ -37,17 +53,7 @@ const mobile_projects = [];
     <span
       class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
     >
-      Mobile Apps
-    </span>
-  </h2>
-  <section class="my-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-    {mobile_projects.map((project) => <MobileProject project={project} />)}
-  </section>
-  <h2>
-    <span
-      class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
-    >
-      Web Apps, CLIs and Libraries
+      Web Apps
     </span>
   </h2>
   <section class="my-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -56,5 +62,15 @@ const mobile_projects = [];
         <Project project={project} data-index={index} />
       ))
     }
+  </section>
+  <!-- <h2>
+    <span
+      class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
+    >
+      Mobile Apps
+    </span>
+  </h2> -->
+  <section class="my-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <!-- {mobile_projects.map((project) => <MobileProject project={project} />)} -->
   </section>
 </Layout>
