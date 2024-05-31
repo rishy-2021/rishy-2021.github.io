@@ -49,9 +49,9 @@ const lifeUpdates = {
   ],
 };
 
-let blogs = (await fetch(
+let blogs = await fetch(
   "https://dev.to/api/articles?username=ritesh-purwar"
-).then((res) => res.json())) as any[];
+).then((res) => res.json());
 blogs = blogs.splice(0, 3);
 ---
 
