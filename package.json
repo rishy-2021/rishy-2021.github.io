@@ -11,7 +11,13 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^4.0.0",
-    "astro": "^2.7.2",
+    "@types/swiper": "^6.0.0",
+    "astro": "^4.16.6",
+    "astro-carousel": "^2.1.0",
+    "swiper": "^11.1.14",
     "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.80.3"
   }
 }

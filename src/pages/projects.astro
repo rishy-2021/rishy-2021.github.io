@@ -1,24 +1,30 @@
 ---
 import Project from "../components/Project.astro";
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+const images = Array.from({ length: 18 }, (_, i) => ({
+  src: `/assets/elevatr/elevatr-${i + 1}.png`,
+  alt: `Elevatr image ${i + 1}`,
+}));
 
 const projects = [
   {
     id: 1,
-    name: "cre-work",
-    description: "Task management app with drag and drop feature",
-    imgUrl: "/assets/cre-work.png",
-    github_link: "https://github.com/rishy-2021/cre-work",
-    live_link: "https://cre-work.vercel.app/dashboard",
-  },
-  {
-    id: 2,
     name: "Pdf-insights-extracter",
     description:
       "Web app in which you can get insights from your submitted pdf.",
     imgUrl: "/assets/pdf-demo.png",
     github_link: "https://github.com/rishy-2021/pdf-insight-extracter",
     live_link: "https://pdf-insight-extracter.vercel.app/",
+  },
+  {
+    id: 2,
+    name: "cre-work",
+    description: "Task management app with drag and drop feature",
+    imgUrl: "/assets/cre-work.png",
+    github_link: "https://github.com/rishy-2021/cre-work",
+    live_link: "https://cre-work.vercel.app/dashboard",
   },
   {
     id: 3,
@@ -47,7 +53,7 @@ const projects = [
     live_link: "https://ritesh-purwar.me/",
   },
   {
-    id: 3,
+    id: 6,
     name: "quiz-master",
     description:
       "a feature-rich web application for conducting MCQ-based tests and allowing students to take tests, view results and teachers to input MCQ questions.",
@@ -57,9 +63,7 @@ const projects = [
   },
 ];
 
-const mobile_projects = [];
 ---
-
 <Layout
   title="Projects | Ritesh Purwar"
   description="Welcome to my page - Sid : )"
@@ -76,28 +80,279 @@ const mobile_projects = [];
       free to contribute.
     </h2>
   </section>
-  <h2>
-    <span
-      class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
-    >
-      Web Apps
-    </span>
-  </h2>
-  <section class="my-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+
+  <!-- Tabs for Web Apps and Mobile Apps -->
+  <div class="tab-container">
+    <button id="web-tab" class="tab-button active">Personal Projects</button>
+    <button id="mobile-tab" class="tab-button">Co-operative Projects</button>
+  </div>
+
+  <!-- Web Apps Section (Initially visible) -->
+  <section
+    id="web-projects"
+    class="project-section my-8 grid grid-cols-1 sm:grid-cols-2 gap-8"
+  >
     {
       projects.map((project, index) => (
         <Project project={project} data-index={index} />
       ))
     }
   </section>
-  <!-- <h2>
-    <span
-      class="text-zinc-900 dark:text-zinc-100 text-2xl md:text-3xl font-bold tracking-tight"
-    >
-      Mobile Apps
-    </span>
-  </h2> -->
-  <section class="my-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-    <!-- {mobile_projects.map((project) => <MobileProject project={project} />)} -->
+
+  <!-- Mobile Apps Section (Initially hidden) -->
+  <section class="cooperative-projects hidden bg-gray-800" id="mobile-projects">
+    <h2 class="section-title">Elevatr.in</h2>
+
+    <div class="project">
+      <div class="project-media">
+        <img src="/assets/elevatr-thumbnail.png" alt="Pdf Insights Extracter" />
+        <!-- <video controls>
+          <source src="path/to/project-demo-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> -->
+      </div>
+      <div class="project-description">
+        <h3>One single platform to manage your business at any scale.</h3>
+        <p>
+          An all-in-one, easy to use and powerful solution for your business
+          requirements. And it does NOT cost you a fortune!.
+          <br />
+          Stop spending your hard earned money on countless tools just to fulfill
+          basic requirements for your business.
+          <br />
+          Billing and accounting are just the base ingredients. With elevatr there's
+          so much more you get to make your business fly.
+        </p>
+      </div>
+    </div>
+    <p class="text-3xl font-semibold text-white p-5">
+      Project Image Gallery
+      <hr class="w-72 mx-5 -mt-2 mb-7" />
+    </p>
+    <div class="flex flex-wrap justify-around" id="image-gallery">
+      {
+       images.map((val) => (
+          <Image
+            src={val.src}
+            alt={val.alt}
+            // width="550"
+            // height="400"
+            class="mb-5 w-[31.5%] rounded-lg border-2 border-gray-500"
+          />
+        ))
+      }
+    </div>
+    <div class="text-center mb-5">
+      <button id="show-more" class="p-2 mt-4 bg-teal-500 text-white font-semibold rounded-full px-5">
+        Show More
+      </button>
+      <button id="show-less" class="p-2 mt-4 ml-4 bg-orange-500 text-white rounded-full px-5" style="display: none;">
+        Show Less
+      </button>
+    </div>
   </section>
 </Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const webTab = document.getElementById("web-tab");
+    const mobileTab = document.getElementById("mobile-tab");
+    const webProjects = document.getElementById("web-projects");
+    const mobileProjects = document.getElementById("mobile-projects");
+    const webTitle = document.getElementById("web-title");
+    const mobileTitle = document.getElementById("mobile-title");
+
+    // Add event listeners for tab buttons
+    webTab?.addEventListener("click", () => {
+      // Switch to web projects
+      webProjects?.classList.remove("hidden");
+      webTitle?.classList.remove("hidden");
+      mobileProjects?.classList.add("hidden");
+      mobileTitle?.classList.add("hidden");
+
+      // Update active tab style
+      webTab.classList.add("active");
+      mobileTab?.classList.remove("active");
+    });
+
+    mobileTab?.addEventListener("click", () => {
+      // Switch to mobile projects
+      mobileProjects?.classList.remove("hidden");
+      mobileTitle?.classList.remove("hidden");
+      webProjects?.classList.add("hidden");
+      webTitle?.classList.add("hidden");
+
+      // Update active tab style
+      mobileTab.classList.add("active");
+      webTab?.classList.remove("active");
+    });
+  });
+</script>
+
+<script>
+  const images = [
+    { src: '/assets/elevatr/elevatr-1.png', alt: 'Elevatr image 1' },
+    { src: '/assets/elevatr/elevatr-2.png', alt: 'Elevatr image 2' },
+    { src: '/assets/elevatr/elevatr-3.png', alt: 'Elevatr image 3' },
+    { src: '/assets/elevatr/elevatr-4.png', alt: 'Elevatr image 4' },
+    { src: '/assets/elevatr/elevatr-5.png', alt: 'Elevatr image 5' },
+    { src: '/assets/elevatr/elevatr-6.png', alt: 'Elevatr image 6' },
+    { src: '/assets/elevatr/elevatr-7.png', alt: 'Elevatr image 7' },
+    { src: '/assets/elevatr/elevatr-8.png', alt: 'Elevatr image 8' },
+    { src: '/assets/elevatr/elevatr-9.png', alt: 'Elevatr image 9' },
+    { src: '/assets/elevatr/elevatr-10.png', alt: 'Elevatr image 10' },
+    { src: '/assets/elevatr/elevatr-11.png', alt: 'Elevatr image 11' },
+    { src: '/assets/elevatr/elevatr-12.png', alt: 'Elevatr image 12' },
+    { src: '/assets/elevatr/elevatr-13.png', alt: 'Elevatr image 13' },
+    { src: '/assets/elevatr/elevatr-14.png', alt: 'Elevatr image 14' },
+    { src: '/assets/elevatr/elevatr-15.png', alt: 'Elevatr image 15' },
+    { src: '/assets/elevatr/elevatr-16.png', alt: 'Elevatr image 16' },
+    { src: '/assets/elevatr/elevatr-17.png', alt: 'Elevatr image 17' },
+    { src: '/assets/elevatr/elevatr-18.png', alt: 'Elevatr image 18' }
+  ];
+
+  let visibleCount = 6;
+  const gallery = document.getElementById('image-gallery');
+  const showMoreBtn = document.getElementById('show-more');
+  const showLessBtn = document.getElementById('show-less');
+
+  function renderImages(count) {
+    gallery.innerHTML = '';
+    images.slice(0, count).forEach(image => {
+      const img = document.createElement('img');
+      img.src = image.src;
+      img.alt = image.alt;
+      img.classList.add('mb-5', 'w-[31.5%]', 'rounded-lg', 'border-2', 'border-gray-500');
+      gallery.appendChild(img);
+    });
+  }
+
+  function showMoreImages() {
+    visibleCount += 3;
+    renderImages(visibleCount);
+    if (visibleCount >= images.length) {
+      showMoreBtn.style.display = 'none';
+    }
+    showLessBtn.style.display = 'inline-block';
+  }
+
+  function showLessImages() {
+    visibleCount = 6;
+    renderImages(visibleCount);
+    showMoreBtn.style.display = 'inline-block';
+    showLessBtn.style.display = 'none';
+  }
+
+  // Initial render
+  renderImages(visibleCount);
+
+  // Event listeners
+  showMoreBtn.addEventListener('click', showMoreImages);
+  showLessBtn.addEventListener('click', showLessImages);
+</script>
+
+<style>
+  .tab-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .tab-button {
+    padding: 8px 16px;
+    border: 1px solid rgb(194, 194, 206);
+    background-color: transparent; /* Transparent background */
+    color: teal; /* Text color */
+    cursor: pointer;
+    font-size: 16px;
+    transition:
+      box-shadow 0.3s ease,
+      border-color 0.3s ease;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  .tab-button:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5); /* Light glow on hover */
+  }
+
+  .tab-button:focus {
+    outline: none;
+  }
+
+  .tab-button.active {
+    border-color: teal; /* Change border color when active */
+    color: #fff; /* Change text color when active */
+    box-shadow: 0 0 15px rgb(52, 136, 122); /* Glowing effect when active */
+  }
+
+  .project-section {
+    margin-top: 16px;
+  }
+
+  .hidden {
+    display: none;
+  }
+  .cooperative-projects {
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: white;
+  }
+
+  .project {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+  }
+
+  .project-media img,
+  .project-media video {
+    max-width: 450px;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+
+  .project-description {
+    flex: 1;
+    color: #ffffff;
+  }
+
+  .project-description h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .project-description p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .project-description a {
+    display: inline-block;
+    margin-right: 15px;
+    color: #007acc;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .project-description a:hover {
+    text-decoration: underline;
+  }
+  .astro-carousel img {
+    width: 100%;
+    height: auto;
+  }
+</style>
