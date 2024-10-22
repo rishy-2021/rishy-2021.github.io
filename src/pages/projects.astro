@@ -1,7 +1,7 @@
 ---
 import Project from "../components/Project.astro";
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
+// import { Image } from "astro:assets";
 
 const images = Array.from({ length: 18 }, (_, i) => ({
   src: `/assets/elevatr/elevatr-${i + 1}.png`,
@@ -132,7 +132,7 @@ const projects = [
     <div class="flex flex-wrap justify-around" id="image-gallery">
       {
        images.map((val) => (
-          <Image
+          <img
             src={val.src}
             alt={val.alt}
             // width="550"
@@ -216,14 +216,14 @@ const projects = [
   const showMoreBtn = document.getElementById('show-more');
   const showLessBtn = document.getElementById('show-less');
 
-  function renderImages(count) {
+  function renderImages(count: number) {
     gallery.innerHTML = '';
     images.slice(0, count).forEach(image => {
       const img = document.createElement('img');
       img.src = image.src;
       img.alt = image.alt;
       img.classList.add('mb-5', 'w-[31.5%]', 'rounded-lg', 'border-2', 'border-gray-500');
-      gallery.appendChild(img);
+      gallery?.appendChild(img);
     });
   }
 
