@@ -1,12 +1,7 @@
 ---
 import Project from "../components/Project.astro";
 import Layout from "../layouts/Layout.astro";
-// import { Image } from "astro:assets";
-
-const images = Array.from({ length: 18 }, (_, i) => ({
-  src: `/assets/elevatr/elevatr-${i + 1}.png`,
-  alt: `Elevatr image ${i + 1}`,
-}));
+import ImageCarousel from "../components/ImageCarousel.astro";
 
 const projects = [
   {
@@ -62,8 +57,8 @@ const projects = [
     live_link: "https://quiz-master-web.netlify.app/",
   },
 ];
-
 ---
+
 <Layout
   title="Projects | Ritesh Purwar"
   description="Welcome to my page - Sid : )"
@@ -83,14 +78,14 @@ const projects = [
 
   <!-- Tabs for Web Apps and Mobile Apps -->
   <div class="tab-container">
-    <button id="web-tab" class="tab-button active">Personal Projects</button>
-    <button id="mobile-tab" class="tab-button">Co-operative Projects</button>
+    <button id="mobile-tab" class="tab-button active">Team Projects</button>
+    <button id="web-tab" class="tab-button">Personal Projects</button>
   </div>
 
   <!-- Web Apps Section (Initially visible) -->
   <section
     id="web-projects"
-    class="project-section my-8 grid grid-cols-1 sm:grid-cols-2 gap-8"
+    class="project-section my-8 grid-cols-1 sm:grid-cols-2 gap-8 grid hidden"
   >
     {
       projects.map((project, index) => (
@@ -100,16 +95,16 @@ const projects = [
   </section>
 
   <!-- Mobile Apps Section (Initially hidden) -->
-  <section class="cooperative-projects hidden bg-gray-800" id="mobile-projects">
+  <section
+    class="cooperative-projects bg-gray-800 flex justify-center items-center flex-col"
+    id="mobile-projects"
+  >
     <h2 class="section-title">Elevatr.in</h2>
 
     <div class="project">
+      <!-- <div class="mx-auto"> -->
       <div class="project-media">
-        <img src="/assets/elevatr-thumbnail.png" alt="Pdf Insights Extracter" />
-        <!-- <video controls>
-          <source src="path/to/project-demo-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video> -->
+        <img src="/assets/elevatr-logo.png" alt="Pdf Insights Extracter" />
       </div>
       <div class="project-description">
         <h3>One single platform to manage your business at any scale.</h3>
@@ -125,32 +120,45 @@ const projects = [
         </p>
       </div>
     </div>
-    <p class="text-3xl font-semibold text-white p-5">
-      Project Image Gallery
-      <hr class="w-72 mx-5 -mt-2 mb-7" />
-    </p>
-    <div class="flex flex-wrap justify-around" id="image-gallery">
-      {
-       images.map((val) => (
-          <img
-            src={val.src}
-            alt={val.alt}
-            // width="550"
-            // height="400"
-            class="mb-5 w-[31.5%] rounded-lg border-2 border-gray-500"
-          />
-        ))
-      }
-    </div>
-    <div class="text-center mb-5">
-      <button id="show-more" class="p-2 mt-4 bg-teal-500 text-white font-semibold rounded-full px-5">
-        Show More
-      </button>
-      <button id="show-less" class="p-2 mt-4 ml-4 bg-orange-500 text-white rounded-full px-5" style="display: none;">
-        Show Less
-      </button>
-    </div>
   </section>
+  <p class="text-3xl font-semibold text-white p-5">
+    Project Demo Videos
+    <hr class="w-72 mx-5 -mt-2 mb-7" />
+  </p>
+  <div class="w-full flex items-center justify-around pb-5 pt-3">
+    <video
+      src="/assets/elevatr-demo-SCOXUI4Q.mp4"
+      muted
+      loop
+      autoplay
+      style={{ border: "1px solid lightgray", borderRadius: 50 }}
+      class="h-48 object-cover video rounded-lg"></video>
+    <video
+      src="/assets/elevatr.webm"
+      loop
+      style={{
+        border: "1px solid lightgray",
+        display: "block",
+        margin: 0,
+        padding: 0,
+      }}
+      class="h-80 object-cover video rounded-lg"
+      autoplay
+      muted>
+    </video>
+    <video
+    src="/assets/elevatrpng-convert.mp4"
+    muted
+    loop
+    autoplay
+    style={{ border: "1px solid lightgray", borderRadius: 50 }}
+    class="h-48 object-cover video rounded-lg"></video>
+  </div>
+  <p class="text-3xl font-semibold text-white p-5 mt-5">
+    Project Image Gallery
+    <hr class="w-72 mx-5 -mt-2 mb-7" />
+  </p>
+  <ImageCarousel />
 </Layout>
 
 <script>
@@ -162,7 +170,6 @@ const projects = [
     const webTitle = document.getElementById("web-title");
     const mobileTitle = document.getElementById("mobile-title");
 
-    // Add event listeners for tab buttons
     webTab?.addEventListener("click", () => {
       // Switch to web projects
       webProjects?.classList.remove("hidden");
@@ -176,79 +183,15 @@ const projects = [
     });
 
     mobileTab?.addEventListener("click", () => {
-      // Switch to mobile projects
       mobileProjects?.classList.remove("hidden");
       mobileTitle?.classList.remove("hidden");
       webProjects?.classList.add("hidden");
       webTitle?.classList.add("hidden");
 
-      // Update active tab style
       mobileTab.classList.add("active");
       webTab?.classList.remove("active");
     });
   });
-</script>
-
-<script>
-  const images = [
-    { src: '/assets/elevatr/elevatr-1.png', alt: 'Elevatr image 1' },
-    { src: '/assets/elevatr/elevatr-2.png', alt: 'Elevatr image 2' },
-    { src: '/assets/elevatr/elevatr-3.png', alt: 'Elevatr image 3' },
-    { src: '/assets/elevatr/elevatr-4.png', alt: 'Elevatr image 4' },
-    { src: '/assets/elevatr/elevatr-5.png', alt: 'Elevatr image 5' },
-    { src: '/assets/elevatr/elevatr-6.png', alt: 'Elevatr image 6' },
-    { src: '/assets/elevatr/elevatr-7.png', alt: 'Elevatr image 7' },
-    { src: '/assets/elevatr/elevatr-8.png', alt: 'Elevatr image 8' },
-    { src: '/assets/elevatr/elevatr-9.png', alt: 'Elevatr image 9' },
-    { src: '/assets/elevatr/elevatr-10.png', alt: 'Elevatr image 10' },
-    { src: '/assets/elevatr/elevatr-11.png', alt: 'Elevatr image 11' },
-    { src: '/assets/elevatr/elevatr-12.png', alt: 'Elevatr image 12' },
-    { src: '/assets/elevatr/elevatr-13.png', alt: 'Elevatr image 13' },
-    { src: '/assets/elevatr/elevatr-14.png', alt: 'Elevatr image 14' },
-    { src: '/assets/elevatr/elevatr-15.png', alt: 'Elevatr image 15' },
-    { src: '/assets/elevatr/elevatr-16.png', alt: 'Elevatr image 16' },
-    { src: '/assets/elevatr/elevatr-17.png', alt: 'Elevatr image 17' },
-    { src: '/assets/elevatr/elevatr-18.png', alt: 'Elevatr image 18' }
-  ];
-
-  let visibleCount = 6;
-  const gallery = document.getElementById('image-gallery');
-  const showMoreBtn = document.getElementById('show-more');
-  const showLessBtn = document.getElementById('show-less');
-
-  function renderImages(count: number) {
-    gallery.innerHTML = '';
-    images.slice(0, count).forEach(image => {
-      const img = document.createElement('img');
-      img.src = image.src;
-      img.alt = image.alt;
-      img.classList.add('mb-5', 'w-[31.5%]', 'rounded-lg', 'border-2', 'border-gray-500');
-      gallery?.appendChild(img);
-    });
-  }
-
-  function showMoreImages() {
-    visibleCount += 3;
-    renderImages(visibleCount);
-    if (visibleCount >= images.length) {
-      showMoreBtn.style.display = 'none';
-    }
-    showLessBtn.style.display = 'inline-block';
-  }
-
-  function showLessImages() {
-    visibleCount = 6;
-    renderImages(visibleCount);
-    showMoreBtn.style.display = 'inline-block';
-    showLessBtn.style.display = 'none';
-  }
-
-  // Initial render
-  renderImages(visibleCount);
-
-  // Event listeners
-  showMoreBtn.addEventListener('click', showMoreImages);
-  showLessBtn.addEventListener('click', showLessImages);
 </script>
 
 <style>
@@ -261,20 +204,18 @@ const projects = [
   .tab-button {
     padding: 8px 16px;
     border: 1px solid rgb(194, 194, 206);
-    background-color: transparent; /* Transparent background */
-    color: teal; /* Text color */
+    background-color: transparent;
+    color: teal;
     cursor: pointer;
     font-size: 16px;
-    transition:
-      box-shadow 0.3s ease,
-      border-color 0.3s ease;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
     border-radius: 5px;
     margin-top: 15px;
     margin-bottom: 5px;
   }
 
   .tab-button:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5); /* Light glow on hover */
+    box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5);
   }
 
   .tab-button:focus {
@@ -282,9 +223,9 @@ const projects = [
   }
 
   .tab-button.active {
-    border-color: teal; /* Change border color when active */
-    color: #fff; /* Change text color when active */
-    box-shadow: 0 0 15px rgb(52, 136, 122); /* Glowing effect when active */
+    border-color: teal;
+    color: #fff;
+    box-shadow: 0 0 15px rgb(52, 136, 122);
   }
 
   .project-section {
@@ -311,15 +252,16 @@ const projects = [
   .project {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-bottom: 40px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
+    /* background-color: red; */
   }
 
   .project-media img,
   .project-media video {
-    max-width: 450px;
+    flex: 1;
     border-radius: 8px;
     margin-right: 20px;
   }
@@ -355,4 +297,12 @@ const projects = [
     width: 100%;
     height: auto;
   }
+
+  .video {
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.video:hover {
+  transform: scale(1.5); /* Scales video to twice its size */
+}
 </style>
