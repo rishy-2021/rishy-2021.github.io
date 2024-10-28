@@ -120,45 +120,45 @@ const projects = [
         </p>
       </div>
     </div>
-  </section>
-  <p class="text-3xl font-semibold text-white p-5">
-    Project Demo Videos
-    <hr class="w-72 mx-5 -mt-2 mb-7" />
-  </p>
-  <div class="w-full flex items-center justify-around pb-5 pt-3">
-    <video
-      src="/assets/elevatr-demo-SCOXUI4Q.mp4"
+    <p class="text-3xl font-semibold text-white p-5">
+      Project Demo Videos
+      <hr class="w-72 mx-5 -mt-2 mb-7" />
+    </p>
+    <div class="w-full flex items-center justify-around pb-5 pt-3">
+      <video
+        src="/assets/elevatr-demo-SCOXUI4Q.mp4"
+        muted
+        loop
+        autoplay
+        style={{ border: "1px solid lightgray", borderRadius: 50 }}
+        class="h-48 object-cover video rounded-lg"></video>
+      <video
+        src="/assets/elevatr.webm"
+        loop
+        style={{
+          border: "1px solid lightgray",
+          display: "block",
+          margin: 0,
+          padding: 0,
+        }}
+        class="h-80 object-cover video rounded-lg"
+        autoplay
+        muted>
+      </video>
+      <video
+      src="/assets/elevatrpng-convert.mp4"
       muted
       loop
       autoplay
       style={{ border: "1px solid lightgray", borderRadius: 50 }}
       class="h-48 object-cover video rounded-lg"></video>
-    <video
-      src="/assets/elevatr.webm"
-      loop
-      style={{
-        border: "1px solid lightgray",
-        display: "block",
-        margin: 0,
-        padding: 0,
-      }}
-      class="h-80 object-cover video rounded-lg"
-      autoplay
-      muted>
-    </video>
-    <video
-    src="/assets/elevatrpng-convert.mp4"
-    muted
-    loop
-    autoplay
-    style={{ border: "1px solid lightgray", borderRadius: 50 }}
-    class="h-48 object-cover video rounded-lg"></video>
-  </div>
-  <p class="text-3xl font-semibold text-white p-5 mt-5">
-    Project Image Gallery
-    <hr class="w-72 mx-5 -mt-2 mb-7" />
-  </p>
-  <ImageCarousel />
+    </div>
+    <p class="text-3xl font-semibold text-white p-5 mt-5">
+      Project Image Gallery
+      <hr class="w-72 mx-5 -mt-2 mb-7" />
+    </p>
+    <ImageCarousel />
+  </section>
 </Layout>
 
 <script>
