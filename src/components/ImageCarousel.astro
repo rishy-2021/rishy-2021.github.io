@@ -1,0 +1,174 @@
+---
+const images = [
+  "/assets/elevatr/elevatr-1.png",
+  "/assets/elevatr/elevatr-2.png",
+  "/assets/elevatr/elevatr-3.png",
+  "/assets/elevatr/elevatr-4.png",
+  "/assets/elevatr/elevatr-5.png",
+  "/assets/elevatr/elevatr-6.png",
+  "/assets/elevatr/elevatr-7.png",
+  "/assets/elevatr/elevatr-8.png",
+  "/assets/elevatr/elevatr-9.png",
+  "/assets/elevatr/elevatr-10.png",
+  "/assets/elevatr/elevatr-11.png",
+  "/assets/elevatr/elevatr-12.png",
+  "/assets/elevatr/elevatr-13.png",
+  "/assets/elevatr/elevatr-14.png",
+  "/assets/elevatr/elevatr-15.png",
+  "/assets/elevatr/elevatr-16.png",
+  "/assets/elevatr/elevatr-17.png",
+  "/assets/elevatr/elevatr-18.png",
+];
+---
+
+<style>
+  .carousel-container {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-item {
+    min-width: calc(100% / 2);
+    flex: 0 0 calc(100% / 2);
+    padding: 10px;
+  }
+
+  .carousel-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel-controls {
+    position: absolute;
+    top: 47%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(10, 1, 1);
+    color: cyan;
+    cursor: pointer;
+    font-size: 16px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .control-btn:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5); /* Light glow on hover */  }
+</style>
+
+<div class="carousel-container">
+  <div class="carousel-track" id="carouselTrack">
+    <!-- Clone last image for smooth looping -->
+    <div class="carousel-item">
+      <img
+        src={images[images.length - 1]}
+        alt="Clone of last image"
+        class="carousel-image h-[21rem]"
+      />
+    </div>
+    {
+      images.map((image, index) => (
+        <div class="carousel-item">
+          <img
+            src={image}
+            alt={`Carousel image ${index + 1}`}
+            class="carousel-image h-[21rem]"
+          />
+        </div>
+      ))
+    }
+    <!-- Clone first image for smooth looping -->
+    <div class="carousel-item">
+      <img src={images[0]} alt="Clone of first image" class="carousel-image h-[21rem]" />
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="control-btn" id="prevBtn">
+        ❮
+    </button>
+    <button class="control-btn" id="nextBtn">
+        ❯
+    </button>
+  </div>
+</div>
+<script>
+  const images = [
+    "/assets/elevatr/elevatr-1.png",
+    "/assets/elevatr/elevatr-2.png",
+    "/assets/elevatr/elevatr-3.png",
+    "/assets/elevatr/elevatr-4.png",
+    "/assets/elevatr/elevatr-5.png",
+    "/assets/elevatr/elevatr-6.png",
+    "/assets/elevatr/elevatr-7.png",
+    "/assets/elevatr/elevatr-8.png",
+    "/assets/elevatr/elevatr-9.png",
+    "/assets/elevatr/elevatr-10.png",
+    "/assets/elevatr/elevatr-11.png",
+    "/assets/elevatr/elevatr-12.png",
+    "/assets/elevatr/elevatr-13.png",
+    "/assets/elevatr/elevatr-14.png",
+    "/assets/elevatr/elevatr-15.png",
+    "/assets/elevatr/elevatr-16.png",
+    "/assets/elevatr/elevatr-17.png",
+    "/assets/elevatr/elevatr-18.png",
+  ];
+  const imagesLength = images.length;
+  const track = document.getElementById("carouselTrack");
+  let currentIndex = 1;
+
+  function updateCarousel(transition = true) {
+    if (transition) {
+      track.style.transition = "transform 0.5s ease-in-out";
+    } else {
+      track.style.transition = "none"; // Disable transition for seamless looping
+    }
+    track.style.transform = `translateX(calc(-${(100 / 2) * currentIndex}%))`;
+  }
+
+  function nextSlide() {
+    currentIndex++;
+    updateCarousel();
+    if (currentIndex === imagesLength + 1) {
+      // Reset to start after last clone
+      setTimeout(() => {
+        currentIndex = 1;
+        updateCarousel(false); // No transition
+      }, 500);
+    }
+  }
+
+  function prevSlide() {
+    currentIndex--;
+    updateCarousel();
+    if (currentIndex === 0) {
+      // Reset to end after first clone
+      setTimeout(() => {
+        currentIndex = imagesLength;
+        updateCarousel(false); // No transition
+      }, 500);
+    }
+  }
+
+  document.getElementById("nextBtn").addEventListener("click", nextSlide);
+  document.getElementById("prevBtn").addEventListener("click", prevSlide);
+
+  setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
+</script>
